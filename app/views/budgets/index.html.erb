@@ -1,0 +1,25 @@
+<h1>Budgets</h1>
+<ul>
+<% @budgets.each do |budget| %>
+  <li>
+    <%= link_to budget.name, budget %>
+  </li>
+<% end %>
+</ul>
+
+<h1>Latest Deductions</h1>
+<ul>
+<% @deductions.each do |deductions| %>
+  <li>
+    <%= link_to(deductions) do %>
+      <%= deductions.name %> :- <%= deductions.amount %>
+    <% end %>
+  </li>
+<% end %>
+</ul>
+
+<p><%= link_to 'All Deductions', deductions_path %></p>
+
+
+<%= link_to 'New Budget', new_budget_path %>
+<%= link_to 'New Deduction', new_deduction_path %>

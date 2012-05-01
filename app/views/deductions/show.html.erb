@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @deduction.name %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @deduction.amount %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @deduction.date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @deduction.description %>
+</p>
+
+<p>
+  <b>Budget:</b>
+  <%= @deduction.budget_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_deduction_path(@deduction) %> |
+<%= link_to 'Back', deductions_path %>

@@ -1,0 +1,16 @@
+<h1><%= @budget.name %></h1>
+
+<p id="notice"><%= notice %></p>
+
+<ul>
+<% @deductions.each do |deductions| %>
+  <li>
+    <%= link_to(deductions) do %>
+      <%= deductions.name %> :- <%= deductions.amount %>
+    <% end %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_budget_path(@budget) %> |
+<%= link_to 'Back', budgets_path %>
