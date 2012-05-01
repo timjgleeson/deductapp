@@ -8,6 +8,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Budget App">
 	<meta name="author" content="Tim Gleeson">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 </head>
 <body>
 
@@ -20,7 +22,7 @@
           <span class="icon-bar"></span>
         </a>
         <%= link_to 'Budget', root_path, class: "brand" %>
-        <div class="nav-collapse collapse" style="height: 0;">
+        <div class="nav-collapse collapse " style="height: 0;">
           <ul class="nav">
             <li class="">
               <%= link_to 'New Deduction', new_deduction_path %>
