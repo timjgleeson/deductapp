@@ -1,4 +1,4 @@
-<%= form_for(@deduction) do |f| %>
+<%= form_for(@deduction, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @deduction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@deduction.errors.count, "error") %> prohibited this deduction from being saved:</h2>
@@ -11,27 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="control-group">
+    <%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
+  <div class="control-group">
+    <%= f.label :amount, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :amount %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
+  <div class="control-group">
+    <%= f.label :date, :class => "control-label" %>
+    <div class="controls">
+      <%= f.date_select :date, :order => [:day, :month, :year], :default => Time.now %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+  <div class="control-group">
+    <%= f.label :description, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :description %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :budget_id, 'Budget' %><br />
-    <%= f.collection_select(:budget_id, Budget.all, :id, :name) %>
+  <div class="control-group">
+    <%= f.label :budget_id, 'Budget', :class => "control-label" %>
+    <div class="controls">
+      <%= f.collection_select(:budget_id, Budget.all, :id, :name) %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-inverse" %>
   </div>
 <% end %>
