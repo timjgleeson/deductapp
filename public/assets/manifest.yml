@@ -1,7 +1,12 @@
 ---
+ico/apple-touch-icon-114-precomposed.png: ico/apple-touch-icon-114-precomposed-598b2196856dd30dd989ffa2a0189b77.png
+ico/apple-touch-icon-144-precomposed.png: ico/apple-touch-icon-144-precomposed-72cae9143ee24ae9a2d880a736ce1137.png
+ico/apple-touch-icon-57-precomposed.png: ico/apple-touch-icon-57-precomposed-c42a2285324d55ea994006944faa1b8c.png
+ico/apple-touch-icon-72-precomposed.png: ico/apple-touch-icon-72-precomposed-d5bba15cd8da9502a3eacc0a2af586eb.png
+ico/favicon.ico: ico/favicon-e67d850326f437773157aa6f96160bc7.ico
 rails.png: rails-be8732dac73d845ac5b142c8fb5f9fb0.png
-application.js: application-a5820b5c9e5ec60ebf1eb709b9eb2c7f.js
-application.css: application-f2fd2ba617fb587012f319531569397f.css
+application.js: application-2b57183c7722c2882f54a4b59ed7aeba.js
+application.css: application-7e558f161ab9fb5edb8dd35666931c53.css
 fontawesome-webfont.eot: fontawesome-webfont-4e8a0fef19937d0b97a3210a35fbfe0d.eot
 fontawesome-webfont.svg: fontawesome-webfont-20c9c5850d0e36c10574c9bd7225bed9.svg
 fontawesome-webfont.svgz: fontawesome-webfont-347222e8281e757082f8c97172fb7bef.svgz
