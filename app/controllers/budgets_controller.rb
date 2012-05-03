@@ -4,8 +4,8 @@ class BudgetsController < ApplicationController
   # GET /budgets
   # GET /budgets.json
   def index
-    @budgets = Budget.all
-    @deductions = Deduction.limit(5)
+    @budgets = current_user.budgets
+    @deductions = current_user.deductions.limit(5)
 
     respond_to do |format|
       format.html # index.html.erb
