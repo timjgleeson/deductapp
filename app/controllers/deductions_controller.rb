@@ -1,4 +1,6 @@
 class DeductionsController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /deductions
   # GET /deductions.json
   def index
@@ -41,6 +43,7 @@ class DeductionsController < ApplicationController
   # POST /deductions.json
   def create
     @deduction = Deduction.new(params[:deduction])
+    @deduction.user_id = current_user.id
 
     respond_to do |format|
       if @deduction.save

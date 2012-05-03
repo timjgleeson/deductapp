@@ -13,12 +13,9 @@ gem 'pg', :group => :production
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'jquery_mobile_rails'
-  gem 'therubyracer'
-  gem 'twitter-bootstrap-rails'
   
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platform => :ruby
+  gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -26,6 +23,10 @@ end
 gem 'jquery-rails'
 
 gem 'devise'
+
+gem 'formtastic-bootstrap', git: 'git://github.com/cgunther/formtastic-bootstrap.git', branch: 'bootstrap2-rails3-2-formtastic-2-1'
+gem 'formtastic', git: 'git://github.com/justinfrench/formtastic.git', branch: '2.1-stable'
+gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
