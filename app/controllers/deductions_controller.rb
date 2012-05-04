@@ -3,6 +3,7 @@ class DeductionsController < ApplicationController
   
   def home
     @deductions = current_user.deductions.limit(5).order("date DESC")
+    @deductions_count = current_user.deductions.count
     
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,7 @@ class DeductionsController < ApplicationController
   # GET /deductions
   # GET /deductions.json
   def index
-    @deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 1).order("date DESC")
+    @deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 10).order("date DESC")
 
     respond_to do |format|
       format.html # index.html.erb
