@@ -1,10 +1,19 @@
 class DeductionsController < ApplicationController
   before_filter :authenticate_user!
   
+  def home
+    @deductions = current_user.deductions.limit(5).order("date DESC")
+    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @budgets }
+    end
+  end
+  
   # GET /deductions
   # GET /deductions.json
   def index
-    @deductions = current_user.deductions.order("date DESC")
+    @deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 1).order("date DESC")
 
     respond_to do |format|
       format.html # index.html.erb

@@ -28,6 +28,9 @@ gem 'formtastic-bootstrap', git: 'git://github.com/cgunther/formtastic-bootstrap
 gem 'formtastic', git: 'git://github.com/justinfrench/formtastic.git', branch: '2.1-stable'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 
+gem 'will_paginate', '~> 3.0'
+gem 'bootstrap-will_paginate'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -1,11 +1,10 @@
 class BudgetsController < ApplicationController
   before_filter :authenticate_user!
-  
+
   # GET /budgets
   # GET /budgets.json
   def index
     @budgets = current_user.budgets
-    @deductions = current_user.deductions.limit(5).order("date DESC")
 
     respond_to do |format|
       format.html # index.html.erb
