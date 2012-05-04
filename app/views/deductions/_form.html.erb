@@ -2,11 +2,11 @@
   <%= f.semantic_errors %>
   
   <%= f.inputs do %>
-    <%= f.input :name %>
-    <%= f.input :amount %>
-    <%= f.input :date, :as => :string, :input_html => {:type => "date"} %>
-    <%= f.input :description %>
-    <%= f.input :budget_id, :as => :select, :collection => Hash[current_user.budgets.map{|b| [b.name, b.id]}] %>
+    <%= f.input :name, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :amount, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :date, :as => :string, :input_html => { :type => "date", :class => "input-xlarge" } %>
+    <%= f.input :description, :input_html => { :class => "input-xlarge", :rows => 3 } %>
+    <%= f.input :budget_id, :as => :select, :collection => Hash[current_user.budgets.map{|b| [b.name, b.id]}], :input_html => { :class => "input-xlarge", :rows => 3 } %>
   <% end %>
   
   <%= f.actions do %>
