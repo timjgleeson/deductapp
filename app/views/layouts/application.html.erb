@@ -30,55 +30,50 @@
     <div class="navbar-inner">
       <div class="container">
         <a class="brand" href="/">Budget</a>
-      </div>
-    </div>
-  </div>
-  
-  <% if user_signed_in? %>
-  <div class="navbar navbar-fixed-bottom">
-    <div class="navbar-inner">
-      <div class="container">
-        <ul class="nav pull-left">
-          <li class="dropdown">        
-            <%= link_to new_deduction_path do %>
-              <i class="icon-plus icon-white"></i> New Deduction
+          <% if user_signed_in? %>
+    <ul class="nav pull-right">
+      <li class="dropdown">        
+        <%= link_to new_deduction_path do %>
+          <i class="icon-plus icon-white"></i> New Deduction
+        <% end %>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-book icon-white"></i>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu ">
+          <% current_user.budgets.each do |budget| %>
+          <li>
+            <%= link_to budget.name, budget %>
+          </li>
+          <% end %>
+          <li class="divider"></li>
+          <li>
+            <%= link_to new_budget_path do %>
+              <i class="icon-plus"></i> New Budget
             <% end %>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="icon-book icon-white"></i>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu ">
-              <% current_user.budgets.each do |budget| %>
-              <li>
-                <%= link_to budget.name, budget %>
-              </li>
-              <% end %>
-              <li class="divider"></li>
-              <li>
-                <%= link_to new_budget_path do %>
-                  <i class="icon-plus"></i> New Budget
-                <% end %>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="icon-user icon-white"></i>
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu ">
-              <li class="divider"></li>
-              <li><%= link_to 'Account', edit_user_registration_path %></li>
-              <li><%= link_to 'Signout', destroy_user_session_path, :method => :delete %></li>
-            </ul>
-          </li>
         </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-user icon-white"></i>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu ">
+          <li class="divider"></li>
+          <li><%= link_to 'Account', edit_user_registration_path %></li>
+          <li><%= link_to 'Signout', destroy_user_session_path, :method => :delete %></li>
+        </ul>
+      </li>
+    </ul>
+  <% end %>
       </div>
     </div>
+  
+
   </div>
-  <% end %>
   
   <div class="container">
   
