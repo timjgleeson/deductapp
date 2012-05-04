@@ -4,7 +4,7 @@ class DeductionsController < ApplicationController
   # GET /deductions
   # GET /deductions.json
   def index
-    @deductions = current_user.deductions
+    @deductions = current_user.deductions.order("date DESC")
 
     respond_to do |format|
       format.html # index.html.erb

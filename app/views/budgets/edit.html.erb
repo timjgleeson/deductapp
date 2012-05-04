@@ -5,4 +5,5 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @budget %> |
+<%= link_to 'Delete', @budget, confirm: 'Are you sure?', method: :delete %> |
 <%= link_to 'Back', budgets_path %>
