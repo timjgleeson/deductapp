@@ -13,10 +13,26 @@
   <div class="tab-content">
     <div class="tab-pane active" id="this-week">
       <ul class="nav nav-tabs nav-stacked">
-			<% @this_weeks_deductions.each do |deductions| %>
+			<% @this_weeks_deductions.each do |deduction| %>
 			  <li>
-			    <%= link_to(deductions) do %>
-			      <%= deductions.name %> :- <%= deductions.amount %> 
+			    <%= link_to(deduction) do %>
+			      <%= deduction.name %> | <%= deduction.amount %> 
+			    <% end %>
+			  </li>
+			<% end %>
+			</ul>
+
+			<ul class="nav nav-tabs nav-stacked">
+			<% current_user.budgets.each do |budget| %>
+	      <%
+	      	amount = budget.amount
+	      	budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
+	      		amount = amount - deduction.amount
+	      	end
+	      %>
+			  <li>
+			    <%= link_to(budget) do %>
+			      <%= budget.name %> @ <%= amount %>
 			    <% end %>
 			  </li>
 			<% end %>
@@ -25,10 +41,10 @@
 
     <div class="tab-pane" id="latest">
       <ul class="nav nav-tabs nav-stacked">
-			<% @latest_deductions.each do |deductions| %>
+			<% @latest_deductions.each do |deduction| %>
 			  <li>
-			    <%= link_to(deductions) do %>
-			      <%= deductions.name %> | <%= deductions.amount %> | <%= deductions.date %>
+			    <%= link_to(deduction) do %>
+			      <%= deduction.name %> | <%= deduction.amount %>
 			    <% end %>
 			  </li>
 			<% end %>

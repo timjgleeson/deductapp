@@ -8,14 +8,12 @@ class DeductionsController < ApplicationController
     @week_end = @week_start + 1.week
 
     @deductions = current_user.deductions
-
-    @latest_deductions = @deductions.limit(5).order("date DESC")
-    
-    @this_weeks_deductions = @deductions.where('date between ? and ?', @week_start, @week_end).order("date ASC")
+    @this_weeks_deductions = current_user.deductions.where('date between ? and ?', @week_start, @week_end).order("date ASC")
+    @latest_deductions = current_user.deductions.limit(5).order("date DESC")
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @budgets }
+      format.json { render json: @deductions }
     end
   end
   
