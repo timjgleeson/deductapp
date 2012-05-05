@@ -2,6 +2,20 @@
 	<h1>Your Deductions</h1>
 </div>
 
+<ul class="nav nav-tabs nav-stacked">
+<% current_user.budgets.each do |budget| %>
+  <%
+  	#amount = budget.amount 
+  	#budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
+  		#amount = amount - deduction.amount
+  	#end
+  %>
+  <li>
+    <%= budget.name %> @ <%= budget.amount %>
+  </li>
+<% end %>
+</ul>
+
 <div class="tabbable">
   <ul class="nav nav-tabs">
     <li class="active"><%= link_to 'This Week', '#this-week', :"data-toggle" => "tab" %></li>

@@ -8,7 +8,7 @@ class DeductionsController < ApplicationController
     @week_end = @week_start + 1.week
 
     @deductions = current_user.deductions
-    @this_weeks_deductions = current_user.deductions.where('date between ? and ?', @week_start, @week_end).order("date ASC")
+    @this_weeks_deductions = current_user.deductions.where('date between ? and ?', @week_start, @week_end).order("date ASC").order("date DESC")
     @latest_deductions = current_user.deductions.limit(5).order("date DESC")
 
     respond_to do |format|
