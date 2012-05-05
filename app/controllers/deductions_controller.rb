@@ -2,9 +2,17 @@ class DeductionsController < ApplicationController
   before_filter :authenticate_user!
   
   def home
-    @deductions = current_user.deductions.limit(5).order("date DESC")
-    @deductions_count = current_user.deductions.count
+    @today = DateTime.now
+    @today_utc = Time.new(@today.year, @today.month, @today.day, 0, 0, 0, 0).utc
+    @week_start = @today_utc - Time.now.wday.days
+    @week_end = @week_start + 1.week
+
+    @deductions = current_user.deductions
+
+    @latest_deductions = @deductions.limit(5).order("date DESC")
     
+    @this_weeks_deductions = @deductions.where('date between ? and ?', @week_start, @week_end).order("date ASC")
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @budgets }
