@@ -21,6 +21,22 @@
 			  </li>
 			<% end %>
 			</ul>
+
+			<ul class="nav nav-tabs nav-stacked">
+			<% current_user.budgets.each do |budget| %>
+	      <%
+	      	amount = budget.amount
+	      	budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
+	      		amount = amount - deduction.amount
+	      	end
+	      %>
+			  <li>
+			    <%= link_to(budget) do %>
+			      <%= budget.name %> @ <%= amount %>
+			    <% end %>
+			  </li>
+			<% end %>
+			</ul>
     </div>
 
     <div class="tab-pane" id="latest">
