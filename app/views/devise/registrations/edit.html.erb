@@ -1,31 +1,20 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="page-header">
+  <h1>Account</h1>
+</div>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :name %><br />
-  <%= f.email_field :name %></div>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.label :username %><br />
-  <%= f.email_field :username %></div>
-
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update" %></div>
+<%= semantic_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal" } do |f| %>
+  <%= f.semantic_errors %>
+  
+  <%= f.inputs do %>
+    <%= f.input :name, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :email, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :username, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :password, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :password_confirmation, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :current_password, :hint => "(we need your current password to confirm your changes)", :input_html => { :class => "input-xlarge" } %>
+  <% end %>
+  
+  <%= f.actions do %>
+    <%= f.action :submit, :label => "Update Account", :button_html => { :class => "btn-inverse" } %>
+  <% end %>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
