@@ -17,7 +17,6 @@
 <div class="tabbable">
   <ul class="nav nav-tabs">
     <li class="active"><%= link_to 'This Week', '#this-week', :"data-toggle" => "tab" %></li>
-    <li><%= link_to 'Favourites', '#favourites', :"data-toggle" => "tab" %></li>
     <li><%= link_to 'Latest', '#latest', :"data-toggle" => "tab" %></li>
     <% if @deductions.count > 5 %>
 		  <li><%= link_to 'All', deductions_path %></li>
@@ -31,23 +30,6 @@
 			  <li>
 			    <%= link_to deduction do %>
 			      <%= deduction.name %> | <%= deduction.amount %> 
-			    <% end %>
-			  </li>
-			<% end %>
-			</ul>
-    </div>
-
-    <div class="tab-pane" id="favourites">
-    	<p>
-    		<%= link_to new_favourite_path do %>
-		      <i class="icon-plus"></i> New Favourite
-		    <% end %>
-		  </p>
-      <ul class="nav nav-tabs nav-stacked">
-			<% current_user.favourites.each do |favourite| %>
-			  <li>
-			    <%= link_to deductions_path( :deduction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :budget_id => favourite.budget_id, :date => DateTime.now } ), :method => :post do %>
-			      <%= favourite.name %> | <%= favourite.amount %> 
 			    <% end %>
 			  </li>
 			<% end %>
