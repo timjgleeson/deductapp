@@ -1,0 +1,12 @@
+<%= semantic_form_for @favourite, :html => { :class => "form-horizontal" } do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :amount, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :description, :input_html => { :class => "input-xlarge", :rows => 3 } %>
+    <%= f.input :budget_id, :as => :select, :collection => Hash[current_user.budgets.map{|b| [b.name, b.id]}], :input_html => { :class => "input-xlarge", :rows => 3 } %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

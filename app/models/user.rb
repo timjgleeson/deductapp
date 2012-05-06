@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
 
   has_many :deductions
   has_many :budgets
+  has_many :favourites
 end

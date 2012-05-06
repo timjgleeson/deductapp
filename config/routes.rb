@@ -1,4 +1,6 @@
 Redacted::Application.routes.draw do
+  resources :favourites
+
   devise_for :users
 
   resources :deductions

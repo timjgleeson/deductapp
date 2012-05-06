@@ -3,4 +3,5 @@ class Budget < ActiveRecord::Base
   
   has_many :deductions
   has_one :user
+  has_many :favourites
 end
