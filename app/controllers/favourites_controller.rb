@@ -1,4 +1,6 @@
 class FavouritesController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /favourites
   # GET /favourites.json
   def index

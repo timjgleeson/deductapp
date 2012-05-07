@@ -1,0 +1,51 @@
+<div class="alert alert-info">
+	<% current_user.budgets.each do |budget| %>
+	  <%
+	  	amount = budget.amount 
+	  	budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
+	  		amount = amount - deduction.amount
+	  	end
+	  %>
+	  <%= budget.name %> @ <%= amount %> <br />
+	<% end %>
+</div>
+
+<div class="page-header">
+	<h1>Your Deductions</h1>
+</div>
+
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><%= link_to 'This Week', '#this-week', :"data-toggle" => "tab" %></li>
+    <li><%= link_to 'Latest', '#latest', :"data-toggle" => "tab" %></li>
+    <% if @deductions.count > 5 %>
+		  <li><%= link_to 'All', deductions_path %></li>
+		<% end %>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="this-week">
+      <ul class="nav nav-tabs nav-stacked">
+			<% @this_weeks_deductions.each do |deduction| %>
+			  <li>
+			    <%= link_to deduction do %>
+			      <%= deduction.name %> | <%= deduction.amount %> 
+			    <% end %>
+			  </li>
+			<% end %>
+			</ul>
+    </div>
+
+    <div class="tab-pane" id="latest">
+      <ul class="nav nav-tabs nav-stacked">
+			<% @latest_deductions.each do |deduction| %>
+			  <li>
+			    <%= link_to(deduction) do %>
+			      <%= deduction.name %> | <%= deduction.amount %>
+			    <% end %>
+			  </li>
+			<% end %>
+			</ul>
+    </div>
+  </div>
+</div>
