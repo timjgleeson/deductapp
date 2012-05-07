@@ -31,6 +31,8 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 
+gem 'acts-as-taggable-on', '~> 2.2.2'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

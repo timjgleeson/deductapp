@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>Your Favourite</h1>
+</div>
 
 <p>
   <b>Name:</b>
@@ -17,12 +19,12 @@
 
 <p>
   <b>Budget:</b>
-  <%= @favourite.budget_id %>
+  <%= @favourite.budget.name %>
 </p>
 
 <p>
-  <b>User:</b>
-  <%= @favourite.user_id %>
+  <b>Tags:</b>
+  <%= @favourite.tag_list %>
 </p>
 
 

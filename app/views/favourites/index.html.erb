@@ -1,0 +1,13 @@
+<div class="page-header">
+	<h1>Your Favourites</h1>
+</div>
+
+<ul class="nav nav-tabs nav-stacked">
+<% @favourites.each do |favourite| %>
+  <li>
+    <%= link_to(favourite) do %>
+      <%= favourite.name %> :- <%= favourite.amount %>
+    <% end %>
+  </li>
+<% end %>
+</ul>

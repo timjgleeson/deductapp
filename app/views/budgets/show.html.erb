@@ -1,6 +1,8 @@
-<h1><%= @budget.name %></h1>
+<div class="page-header">
+	<h1><%= @budget.name %></h1>
+</div>
 
-<ul>
+<ul class="nav nav-tabs nav-stacked">
 <% @deductions.each do |deductions| %>
   <li>
     <%= link_to(deductions) do %>

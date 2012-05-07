@@ -45,12 +45,15 @@
               <ul class="dropdown-menu ">
                 <% current_user.favourites.each do |favourite| %>
                   <li>
-                    <%= link_to deductions_path( :deduction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :budget_id => favourite.budget_id, :date => DateTime.now } ), :method => :post do %>
+                    <%= link_to deductions_path( :deduction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :budget_id => favourite.budget_id, :date => DateTime.now, :tag_list => favourite.tag_list } ), :method => :post do %>
                       <%= favourite.name %> | <%= favourite.amount %> 
                     <% end %>
                   </li>
                 <% end %>
                 <li class="divider"></li>
+                <li>
+                  <%= link_to 'Favourites List', favourites_path %>
+                </li>
                 <li>
                   <%= link_to new_favourite_path do %>
                     <i class="icon-plus"></i> New Favourite

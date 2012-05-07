@@ -7,6 +7,7 @@
     <%= f.input :date, :as => :string, :input_html => { :type => "date", :class => "input-xlarge" } %>
     <%= f.input :description, :input_html => { :class => "input-xlarge", :rows => 3 } %>
     <%= f.input :budget_id, :as => :select, :collection => Hash[current_user.budgets.map{|b| [b.name, b.id]}], :input_html => { :class => "input-xlarge", :rows => 3 } %>
+    <%= f.input :tag_list, :input_html => { :class => "input-xlarge" } %>
   <% end %>
   
   <%= f.actions do %>

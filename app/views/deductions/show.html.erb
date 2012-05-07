@@ -1,3 +1,7 @@
+<div class="page-header">
+  <h1>Deduction</h1>
+</div>
+  
 <p>
   <b>Name:</b>
   <%= @deduction.name %>
@@ -20,9 +24,14 @@
 
 <p>
   <b>Budget:</b>
-  <%= @deduction.budget_id %>
+  <%= @deduction.budget.name %>
 </p>
 
+<p>
+  <b>Tags:</b>
+  <%= @deduction.tag_list %>
+</p>
 
 <%= link_to 'Edit', edit_deduction_path(@deduction) %> |
+<%= link_to 'Mark as a Favourite', favourites_path(:favourite => { :name => @deduction.name, :amount => @deduction.amount, :description => @deduction.description, :budget_id => @deduction.budget_id, :tag_list => @deduction.tag_list}), :method => :post %> |
 <%= link_to 'Back', deductions_path %>

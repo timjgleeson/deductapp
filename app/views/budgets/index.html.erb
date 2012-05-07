@@ -1,0 +1,13 @@
+<div class="page-header">
+	<h1>Your Budgets</h1>
+</div>
+
+<ul class="nav nav-tabs nav-stacked">
+<% @budgets.each do |budget| %>
+  <li>
+    <%= link_to(budget) do %>
+      <%= budget.name %> :- <%= budget.amount %>
+    <% end %>
+  </li>
+<% end %>
+</ul>
