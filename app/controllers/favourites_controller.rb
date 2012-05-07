@@ -4,7 +4,7 @@ class FavouritesController < ApplicationController
   # GET /favourites
   # GET /favourites.json
   def index
-    @favourites = Favourite.all
+    @favourites = current_user.favourites
 
     respond_to do |format|
       format.html # index.html.erb
