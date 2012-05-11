@@ -5,8 +5,11 @@
 <ul class="nav nav-tabs nav-stacked">
 <% @budgets.each do |budget| %>
   <li>
-    <%= link_to(budget) do %>
-      <%= budget.name %> :- <%= budget.amount %>
+    <%= link_to budget, :class => "clearfix" do %>
+      <span class="pull-left">
+        <strong><%= budget.name %></strong> <br />
+        $<%= budget.amount %>
+      </span>
     <% end %>
   </li>
 <% end %>

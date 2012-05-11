@@ -1,16 +1,18 @@
 <div class="page-header">
-	<h1><%= @budget.name %></h1>
+	<h1 class="clearfix"><%= @budget.name %> <small class="pull-right"><%= link_to edit_budget_path(@budget) do %><i class="icon-edit"></i><% end %></small></h1>
 </div>
 
 <ul class="nav nav-tabs nav-stacked">
-<% @deductions.each do |deductions| %>
+<% @deductions.each do |deduction| %>
   <li>
-    <%= link_to(deductions) do %>
-      <%= deductions.name %> :- <%= deductions.amount %>
+    <%= link_to deduction, :class => 'clearfix' do %>
+      <span class="pull-left">
+        <strong><%= deduction.name %></strong> <br />
+        $<%= deduction.amount %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+      </span>
     <% end %>
   </li>
 <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_budget_path(@budget) %> |
-<%= link_to 'Back', budgets_path %>
+<%= will_paginate @deductions %>
