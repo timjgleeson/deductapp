@@ -1,5 +1,16 @@
 <div class="page-header">
-  <h1>Deduction</h1>
+  <h1>
+    Deduction 
+    <small class="pull-right">
+      <%= link_to favourites_path(:favourite => { :name => @deduction.name, :amount => @deduction.amount, :description => @deduction.description, :budget_id => @deduction.budget_id, :tag_list => @deduction.tag_list}), :method => :post do %>
+        <i class="icon-star"></i>
+      <% end %>
+      &nbsp;
+      <%= link_to edit_deduction_path(@deduction) do %>
+        <i class="icon-edit"></i>
+      <% end %>
+    </small>
+  </h1>
 </div>
   
 <p>
@@ -9,7 +20,7 @@
 
 <p>
   <b>Amount:</b>
-  <%= number_with_precision @deduction.amount, :precision => 2 %>
+  <%= number_to_currency(@deduction.amount) %>
 </p>
 
 <p>
@@ -31,7 +42,3 @@
   <b>Tags:</b>
   <%= @deduction.tag_list %>
 </p>
-
-<%= link_to 'Edit', edit_deduction_path(@deduction) %> |
-<%= link_to 'Mark as a Favourite', favourites_path(:favourite => { :name => @deduction.name, :amount => @deduction.amount, :description => @deduction.description, :budget_id => @deduction.budget_id, :tag_list => @deduction.tag_list}), :method => :post %> |
-<%= link_to 'Back', deductions_path %>

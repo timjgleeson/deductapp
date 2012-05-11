@@ -1,37 +1,22 @@
-<div class="alert alert-info">
-  <% current_user.budgets.each do |budget| %>
-    <%
-      amount = budget.amount 
-      budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
-        amount = amount - deduction.amount
-      end
-    %>
-    <%= budget.name %> @ <%= amount %> <br />
-  <% end %>
-</div>
-
 <div class="page-header">
-  <h1>Your Deductions</h1>
+  <h1>This week</h1>
 </div>
 
 <div class="tabbable">
   <ul class="nav nav-tabs">
-    <li class="active"><%= link_to 'This Week', '#this-week', :"data-toggle" => "tab" %></li>
-    <li><%= link_to 'Latest', '#latest', :"data-toggle" => "tab" %></li>
-    <% if @deductions.count > 5 %>
-      <li><%= link_to 'All', deductions_path %></li>
-    <% end %>
+    <li class="pull-right"><%= link_to '#this-week', :"data-toggle" => "tab" do %><i class="icon-minus icon-white"></i> <span class="hidden-phone">Deductions</span><% end %></li>
+    <li class="active pull-right"><%= link_to '#budgets', :"data-toggle" => "tab" do %><i class="icon-book icon-white"></i> <span class="hidden-phone">Budgets</span><% end %></li>
   </ul>
 
   <div class="tab-content">
-    <div class="tab-pane active" id="this-week">
+    <div class="tab-pane" id="this-week">
       <ul class="nav nav-tabs nav-stacked">
       <% @this_weeks_deductions.each do |deduction| %>
         <li>
           <%= link_to deduction, :class => 'clearfix' do %>
             <span class="pull-left">
               <strong><%= deduction.name %></strong> <br />
-              $<%= number_with_precision deduction.amount, :precision => 2 %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+              <%= number_to_currency(deduction.amount) %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
             </span>
             <span class="pull-right">
               <br /><%= deduction.budget.name %>
@@ -40,24 +25,27 @@
         </li>
       <% end %>
       </ul>
-      <%= will_paginate @this_weeks_deductions %>
+      <%= will_paginate @this_weeks_deductions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
     </div>
 
-    <div class="tab-pane" id="latest">
+    <div class="tab-pane active" id="budgets">
       <ul class="nav nav-tabs nav-stacked">
-      <% @latest_deductions.each do |deduction| %>
-        <li>
-          <%= link_to deduction, :class => 'clearfix' do %>
-            <span class="pull-left">
-              <strong><%= deduction.name %></strong> <br />
-              $<%= number_with_precision deduction.amount, :precision => 2 %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
-            </span>
-            <span class="pull-right">
-              <br /><%= deduction.budget.name %>
-            </span>
-          <% end %>
-        </li>
-      <% end %>
+        <% current_user.budgets.each do |budget| %>
+          <li>
+            <%
+              amount = budget.amount 
+              budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
+                amount = amount - deduction.amount
+              end
+            %>
+            <%= link_to budget, :class => 'clearfix' do %>
+              <span class="pull-left">
+                <strong><%= budget.name %></strong> <br />
+                <%= number_to_currency(amount) %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
