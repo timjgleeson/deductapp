@@ -45,7 +45,7 @@
               <ul class="dropdown-menu ">
                 <% current_user.favourites.each do |favourite| %>
                   <li>
-                    <%= link_to deductions_path( :deduction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :budget_id => favourite.budget_id, :date => DateTime.now, :tag_list => favourite.tag_list } ), :method => :post do %>
+                    <%= link_to deductions_path( :deduction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post do %>
                       <%= favourite.name %> | <%= favourite.amount %> 
                     <% end %>
                   </li>

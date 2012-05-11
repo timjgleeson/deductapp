@@ -4,7 +4,7 @@ class DeductionsController < ApplicationController
   # GET /deductions
   # GET /deductions.json
   def index
-    @deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 10).order("date DESC")
+    @deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 10).order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

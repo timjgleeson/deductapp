@@ -4,19 +4,19 @@
 
 <div class="tabbable">
   <ul class="nav nav-tabs">
-    <li class="pull-right"><%= link_to '#this-week', :"data-toggle" => "tab" do %><i class="icon-minus icon-white"></i> <span class="hidden-phone">Deductions</span><% end %></li>
-    <li class="active pull-right"><%= link_to '#budgets', :"data-toggle" => "tab" do %><i class="icon-book icon-white"></i> <span class="hidden-phone">Budgets</span><% end %></li>
+    <li class="<%= "active " if params[:page].presence %>pull-right"><%= link_to '#this-week', :"data-toggle" => "tab" do %><i class="icon-minus icon-white"></i> <span class="hidden-phone">Deductions</span><% end %></li>
+    <li class="<%= "active " if params[:page].nil? %>pull-right"><%= link_to '#budgets', :"data-toggle" => "tab" do %><i class="icon-book icon-white"></i> <span class="hidden-phone">Budgets</span><% end %></li>
   </ul>
 
   <div class="tab-content">
-    <div class="tab-pane" id="this-week">
+    <div class="<%= "active " if params[:page].presence %>tab-pane" id="this-week">
       <ul class="nav nav-tabs nav-stacked">
       <% @this_weeks_deductions.each do |deduction| %>
         <li>
           <%= link_to deduction, :class => 'clearfix' do %>
             <span class="pull-left">
               <strong><%= deduction.name %></strong> <br />
-              <%= number_to_currency(deduction.amount) %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+              <%= number_to_currency(deduction.amount) %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
             </span>
             <span class="pull-right">
               <br /><%= deduction.budget.name %>
@@ -28,13 +28,13 @@
       <%= will_paginate @this_weeks_deductions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
     </div>
 
-    <div class="tab-pane active" id="budgets">
+    <div class="<%= "active " if params[:page].nil? %>tab-pane" id="budgets">
       <ul class="nav nav-tabs nav-stacked">
         <% current_user.budgets.each do |budget| %>
           <li>
             <%
               amount = budget.amount 
-              budget.deductions.where('date between ? and ?', @week_start, @week_end).each do |deduction|
+              budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
                 amount = amount - deduction.amount
               end
             %>
