@@ -2,13 +2,9 @@
   <h1>
     Deduction 
     <small class="pull-right">
-      <%= link_to favourites_path(:favourite => { :name => @deduction.name, :amount => @deduction.amount, :description => @deduction.description, :budget_id => @deduction.budget_id, :tag_list => @deduction.tag_list}), :method => :post do %>
-        <i class="icon-star"></i>
-      <% end %>
+      <%= link_to favourites_path(:favourite => { :name => @deduction.name, :amount => @deduction.amount, :description => @deduction.description, :budget_id => @deduction.budget_id, :tag_list => @deduction.tag_list}), :method => :post do %><i class="icon-star"></i><% end %>
       &nbsp;
-      <%= link_to edit_deduction_path(@deduction) do %>
-        <i class="icon-edit"></i>
-      <% end %>
+      <%= link_to edit_deduction_path(@deduction) do %><i class="icon-edit"></i><% end %>
     </small>
   </h1>
 </div>
@@ -33,7 +29,18 @@
   <%= @deduction.budget.name %>
 </p>
 
+<% if @deduction.tag_list.nil? %>
 <p>
   <b>Tags:</b>
   <%= @deduction.tag_list %>
 </p>
+<% end %>
+
+<% if current_user == @deduction.budget.users.include?(current_user) %>
+<p>
+  <b>Created by:</b>
+  <%= @deduction.user.name unless @deduction.user.name.empty? %>
+  <%= @deduction.user.username if @deduction.user.name.empty? %>
+  <%= @deduction.user.email if @deduction.user.name.empty? && @deduction.user.username.empty? %>
+</p>
+<% end %>

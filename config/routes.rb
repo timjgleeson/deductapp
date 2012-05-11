@@ -1,9 +1,11 @@
 Redacted::Application.routes.draw do
+
   get "home/index"
 
   resources :favourites
 
   devise_for :users
+  resources :users
 
   resources :deductions
 

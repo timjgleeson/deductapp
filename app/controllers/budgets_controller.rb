@@ -44,7 +44,7 @@ class BudgetsController < ApplicationController
   # POST /budgets.json
   def create
     @budget = Budget.new(params[:budget])
-    @budget.user_id = current_user.id
+    @budget.users << current_user
 
     respond_to do |format|
       if @budget.save

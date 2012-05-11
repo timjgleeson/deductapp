@@ -1,5 +1,5 @@
 class DeductionsController < ApplicationController
-  before_filter :authenticate_user!
+  
   
   # GET /deductions
   # GET /deductions.json

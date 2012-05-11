@@ -11,7 +11,7 @@
   <div class="tab-content">
     <div class="<%= "active " if params[:page].presence %>tab-pane" id="this-week">
       <ul class="nav nav-tabs nav-stacked">
-      <% @this_weeks_deductions.each do |deduction| %>
+      <% @deductions.each do |deduction| %>
         <li>
           <%= link_to deduction, :class => 'clearfix' do %>
             <span class="pull-left">
@@ -25,7 +25,7 @@
         </li>
       <% end %>
       </ul>
-      <%= will_paginate @this_weeks_deductions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
+      <%= will_paginate @deductions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
     </div>
 
     <div class="<%= "active " if params[:page].nil? %>tab-pane" id="budgets">
@@ -41,6 +41,7 @@
             <%= link_to budget, :class => 'clearfix' do %>
               <span class="pull-left">
                 <strong><%= budget.name %></strong> <br />
+
                 <%= number_to_currency(amount) %>
               </span>
             <% end %>
