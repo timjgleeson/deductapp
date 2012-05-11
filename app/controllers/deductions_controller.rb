@@ -8,8 +8,8 @@ class DeductionsController < ApplicationController
     @week_end = @week_start + 1.week
 
     @deductions = current_user.deductions
-    @this_weeks_deductions = current_user.deductions.where('date between ? and ?', @week_start, @week_end).order("date ASC").order("date DESC")
-    @latest_deductions = current_user.deductions.limit(5).order("date DESC")
+    @this_weeks_deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 10).where('date between ? and ?', @week_start, @week_end).order("date DESC, budget_id ASC")
+    @latest_deductions = current_user.deductions.limit(10).order("date DESC, budget_id ASC")
 
     respond_to do |format|
       format.html # index.html.erb

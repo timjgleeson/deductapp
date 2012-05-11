@@ -2,10 +2,16 @@
     <h1>All Deductions</h1>
 </div>
 <ul class="nav nav-tabs nav-stacked">
-<% @deductions.each do |deductions| %>
+<% @deductions.each do |deduction| %>
   <li>
-    <%= link_to(deductions) do %>
-      <%= deductions.name %> :- <%= deductions.amount %>
+    <%= link_to deduction, :class => 'clearfix' do %>
+      <span class="pull-left">
+        <strong><%= deduction.name %></strong> <br />
+        $<%= deduction.amount %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+      </span>
+      <span class="pull-right">
+        <br /><%= deduction.budget.name %>
+      </span>
     <% end %>
   </li>
 <% end %>

@@ -28,20 +28,33 @@
       <ul class="nav nav-tabs nav-stacked">
 			<% @this_weeks_deductions.each do |deduction| %>
 			  <li>
-			    <%= link_to deduction do %>
-			      <%= deduction.name %> | <%= deduction.amount %> 
+			    <%= link_to deduction, :class => 'clearfix' do %>
+			      <span class="pull-left">
+			        <strong><%= deduction.name %></strong> <br />
+			        $<%= deduction.amount %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+			      </span>
+			      <span class="pull-right">
+			        <br /><%= deduction.budget.name %>
+			      </span>
 			    <% end %>
 			  </li>
 			<% end %>
 			</ul>
+			<%= will_paginate @this_weeks_deductions %>
     </div>
 
     <div class="tab-pane" id="latest">
       <ul class="nav nav-tabs nav-stacked">
 			<% @latest_deductions.each do |deduction| %>
 			  <li>
-			    <%= link_to(deduction) do %>
-			      <%= deduction.name %> | <%= deduction.amount %>
+			    <%= link_to deduction, :class => 'clearfix' do %>
+			      <span class="pull-left">
+			        <strong><%= deduction.name %></strong> <br />
+			        $<%= deduction.amount %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+			      </span>
+			      <span class="pull-right">
+			        <br /><%= deduction.budget.name %>
+			      </span>
 			    <% end %>
 			  </li>
 			<% end %>
