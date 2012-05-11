@@ -8,7 +8,7 @@
     <%= link_to deduction, :class => 'clearfix' do %>
       <span class="pull-left">
         <strong><%= deduction.name %></strong> <br />
-        $<%= deduction.amount %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+        $<%= number_with_precision deduction.amount, :precision => 2 %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
       </span>
     <% end %>
   </li>

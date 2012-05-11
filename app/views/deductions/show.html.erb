@@ -9,7 +9,7 @@
 
 <p>
   <b>Amount:</b>
-  <%= @deduction.amount %>
+  <%= number_with_precision @deduction.amount, :precision => 2 %>
 </p>
 
 <p>

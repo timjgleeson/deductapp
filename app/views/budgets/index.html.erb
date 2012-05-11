@@ -8,7 +8,7 @@
     <%= link_to budget, :class => "clearfix" do %>
       <span class="pull-left">
         <strong><%= budget.name %></strong> <br />
-        $<%= budget.amount %>
+        $<%= number_with_precision budget.amount, :precision => 2 %>
       </span>
     <% end %>
   </li>
