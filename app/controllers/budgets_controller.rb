@@ -1,5 +1,6 @@
 class BudgetsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_time_zone
 
   # GET /budgets
   # GET /budgets.json

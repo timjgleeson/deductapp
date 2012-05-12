@@ -1,5 +1,6 @@
 class FavouritesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_time_zone
 
   # GET /favourites
   # GET /favourites.json

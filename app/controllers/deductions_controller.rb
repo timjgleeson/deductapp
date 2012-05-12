@@ -1,5 +1,6 @@
 class DeductionsController < ApplicationController
-  
+  before_filter :authenticate_user!
+  before_filter :set_time_zone
   
   # GET /deductions
   # GET /deductions.json

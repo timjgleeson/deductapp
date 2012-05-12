@@ -8,7 +8,7 @@
     </small>
   </h1>
 </div>
-  
+
 <p>
   <b>Name:</b>
   <%= @deduction.name %>
@@ -24,10 +24,12 @@
   <%= @deduction.description %>
 </p>
 
+<% if !@deduction.budget.nil? %>
 <p>
   <b>Budget:</b>
   <%= @deduction.budget.name %>
 </p>
+<% end %>
 
 <% if @deduction.tag_list.nil? %>
 <p>
@@ -36,6 +38,7 @@
 </p>
 <% end %>
 
+<% if !@deduction.budget.nil? %>
 <% if current_user == @deduction.budget.users.include?(current_user) %>
 <p>
   <b>Created by:</b>
@@ -43,4 +46,5 @@
   <%= @deduction.user.username if @deduction.user.name.empty? %>
   <%= @deduction.user.email if @deduction.user.name.empty? && @deduction.user.username.empty? %>
 </p>
+<% end %>
 <% end %>

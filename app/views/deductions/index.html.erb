@@ -10,7 +10,9 @@
         <%= number_to_currency(deduction.amount) %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
       </span>
       <span class="pull-right">
-        <br /><%= deduction.budget.name %>
+        <% if !deduction.budget.nil? %>
+          <br /><%= deduction.budget.name %>
+        <% end %>
       </span>
     <% end %>
   </li>
