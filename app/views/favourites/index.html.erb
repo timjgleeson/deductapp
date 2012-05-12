@@ -5,8 +5,17 @@
 <ul class="nav nav-tabs nav-stacked">
 <% @favourites.each do |favourite| %>
   <li>
-    <%= link_to(favourite) do %>
-      <%= favourite.name %> :- <%= favourite.amount %>
+
+    <%= link_to favourite, :class => 'clearfix' do %>
+      <span class="pull-left">
+        <strong><%= favourite.name %></strong> <br />
+        <%= number_to_currency(favourite.amount) %>
+      </span>
+      <span class="pull-right">
+        <% if !favourite.budget.nil? %>
+          <br /><%= favourite.budget.name %>
+        <% end %>
+      </span>
     <% end %>
   </li>
 <% end %>
