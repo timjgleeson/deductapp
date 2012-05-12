@@ -7,7 +7,7 @@
     <%= link_to deduction, :class => 'clearfix' do %>
       <span class="pull-left">
         <strong><%= deduction.name %></strong> <br />
-        <%= number_to_currency(deduction.amount) %> on <%= deduction.date.strftime('%e/%-m/%Y') %>
+        <%= number_to_currency(deduction.amount) %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
       </span>
       <span class="pull-right">
         <br /><%= deduction.budget.name %>
