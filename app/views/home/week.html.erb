@@ -1,0 +1,9 @@
+<div class="page-header">
+  <h1>
+    Week 
+    <small class="pull-right visible-phone" style="margin-top: 8px"><%= @week_start.strftime('%e/%-m/%Y') %> - <%= @week_end.strftime('%e/%-m/%Y') %></small>
+    <small class="hidden-phone"><%= @week_start.strftime('%e/%-m/%Y') %> - <%= @week_end.strftime('%e/%-m/%Y') %></small>
+  </h1>
+</div>
+
+<%= render 'tab_content' %>
