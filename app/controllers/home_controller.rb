@@ -20,7 +20,7 @@ class HomeController < ApplicationController
   def week 
     @week_start = Time.new(params[:year], params[:month], params[:day], 0, 0, 0, 0)
     @week_start = @week_start - @week_start.wday.days
-    @week_end = @week_start + 1.week - 1.day
+    @week_end = @week_start + 1.week
 
     @deductions = current_user.deductions.paginate(:page => params[:page], :per_page => 10).where('created_at between ? and ?', @week_start, @week_end).order("created_at DESC, budget_id ASC")
 
