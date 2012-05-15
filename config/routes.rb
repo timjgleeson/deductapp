@@ -1,6 +1,6 @@
 Redacted::Application.routes.draw do
 
-  get "home/index"
+  get "week/:year/:month/:day" => "home#week", :as => :week_of
 
   resources :favourites
 

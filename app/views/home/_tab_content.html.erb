@@ -1,0 +1,72 @@
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="pull-right"><%= link_to '#weeks', :"data-toggle" => "tab" do %><i class="icon-calendar"></i> <span class="hidden-phone">Weeks</span><% end %></li>
+    <li class="<%= "active " if params[:page].presence %>pull-right"><%= link_to '#week', :"data-toggle" => "tab" do %><i class="icon-minus"></i> <span class="hidden-phone">Deductions</span><% end %></li>
+    <li class="<%= "active " if params[:page].nil? %>pull-right"><%= link_to '#budgets', :"data-toggle" => "tab" do %><i class="icon-book"></i> <span class="hidden-phone">Budgets</span><% end %></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="<%= "active " if params[:page].presence %>tab-pane" id="week">
+      <ul class="nav nav-tabs nav-stacked">
+      <% @deductions.each do |deduction| %>
+        <li>
+          <%= link_to deduction, :class => 'clearfix' do %>
+            <span class="pull-left">
+              <strong><%= deduction.name %></strong> <br />
+              <%= number_to_currency(deduction.amount) %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
+            </span>
+            <span class="pull-right">
+              <% if !deduction.budget.nil? %>
+                <br /><%= deduction.budget.name %>
+              <% end %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+      </ul>
+      <%= will_paginate @deductions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
+    </div>
+
+    <div class="<%= "active " if params[:page].nil? %>tab-pane" id="budgets">
+      <ul class="nav nav-tabs nav-stacked">
+        <% current_user.budgets.each do |budget| %>
+          <li>
+            <%
+              amount = budget.amount 
+              budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
+                amount = amount - deduction.amount
+              end
+            %>
+            <%= link_to budget, :class => 'clearfix' do %>
+              <span class="pull-left">
+                <strong><%= budget.name %></strong> <br />
+
+                <%= number_to_currency(amount) %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="tab-pane" id="weeks">
+      <ul class="nav nav-tabs nav-stacked">
+        <li>
+          <%= link_to week_of_path(2012, 5, 13) do %>
+            13/5/2012 - 19/5/2012
+          <% end %>
+        </li>
+        <li>
+          <%= link_to week_of_path(2012, 5, 6) do %>
+            6/5/2012 - 12/5/2012
+          <% end %>
+        </li>
+        <li>
+          <%= link_to week_of_path(2012, 4, 29) do %>
+            29/4/2012 - 5/5/2012
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
