@@ -5,33 +5,28 @@
         <i class="icon-calendar"></i> <span class="hidden-phone">Weeks</span>
       <% end %>
     </li>
-    <li class="<%= "active " if params[:deduction_page].presence %>pull-right">
-      <%= link_to '#week-deduction', :"data-toggle" => "tab" do %>
-        <i class="icon-minus"></i> <span class="hidden-phone">Deductions</span>
-      <% end %>
-    </li>
     <li class="<%= "active " if params[:addition_page].presence %>pull-right">
       <%= link_to '#week-addition', :"data-toggle" => "tab" do %>
         <i class="icon-plus"></i> <span class="hidden-phone">Additions</span>
       <% end %>
     </li>
-    <li class="pull-right">
-      <%= link_to '#budgets-savings', :"data-toggle" => "tab" do %>
-        <i class="icon-bar-chart"></i> <span class="hidden-phone">Savings Budgets</span>
+    <li class="<%= "active " if params[:deduction_page].presence %>pull-right">
+      <%= link_to '#week-deduction', :"data-toggle" => "tab" do %>
+        <i class="icon-minus"></i> <span class="hidden-phone">Deductions</span>
       <% end %>
     </li>
     <li class="<%= "active " if params[:deduction_page].nil? && params[:addition_page].nil? %>pull-right">
-      <%= link_to '#budgets-spending', :"data-toggle" => "tab" do %>
-        <i class="icon-shopping-cart"></i> <span class="hidden-phone">Spending Budgets</span>
+      <%= link_to '#budgets', :"data-toggle" => "tab" do %>
+        <i class="icon-book"></i> <span class="hidden-phone">Budgets</span>
       <% end %>
     </li>
   </ul>
 
   <div class="tab-content">
 
-    <div class="<%= "active " if params[:deduction_page].nil? && params[:addition_page].nil? %>tab-pane" id="budgets-spending">
+    <div class="<%= "active " if params[:deduction_page].nil? && params[:addition_page].nil? %>tab-pane" id="budgets">
       <ul class="nav nav-tabs nav-stacked">
-        <% current_user.budgets.where("usage = 'spending'").each do |budget| %>
+        <% current_user.budgets.each do |budget| %>
           <li>
             <%
               amount = budget.amount 
@@ -44,30 +39,14 @@
             %>
             <%= link_to budget, :class => 'clearfix' do %>
               <span class="pull-left">
-                <strong><%= budget.name %></strong> <br />
-
-                <%= number_to_currency(amount) %>
+                <% if budget.usage == 'spending' %>
+                  <i class="icon-shopping-cart"></i>&nbsp;
+                <% elsif budget.usage == 'saving' %>  
+                  <i class="icon-bar-chart"></i>&nbsp;
+                <% end %>
               </span>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-    <div class="tab-pane" id="budgets-savings">
-      <ul class="nav nav-tabs nav-stacked">
-        <% current_user.budgets.where("usage = 'saving'").each do |budget| %>
-          <li>
-            <%
-              amount = budget.amount 
-              budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
-                amount = amount - deduction.amount
-              end
-            %>
-            <%= link_to budget, :class => 'clearfix' do %>
               <span class="pull-left">
                 <strong><%= budget.name %></strong> <br />
-
                 <%= number_to_currency(amount) %>
               </span>
             <% end %>
@@ -87,7 +66,13 @@
             </span>
             <span class="pull-right">
               <% if !deduction.budget.nil? %>
-                <br /><%= deduction.budget.name %>
+                <br />
+                <% if deduction.budget.usage == 'spending' %>
+                  <i class="icon-shopping-cart"></i>
+                <% elsif deduction.budget.usage == 'saving' %>  
+                  <i class="icon-bar-chart"></i>
+                <% end %>
+                <%= deduction.budget.name %>
               <% end %>
             </span>
           <% end %>
@@ -108,7 +93,13 @@
             </span>
             <span class="pull-right">
               <% if !addition.budget.nil? %>
-                <br /><%= addition.budget.name %>
+                <br />
+                <% if addition.budget.usage == 'spending' %>
+                  <i class="icon-shopping-cart"></i>
+                <% elsif addition.budget.usage == 'saving' %>  
+                  <i class="icon-bar-chart"></i>
+                <% end %>
+                <%= addition.budget.name %>
               <% end %>
             </span>
           <% end %>
