@@ -1,8 +1,8 @@
-task :deploy => ['deploy:push', 'deploy:restart', 'deploy:tag']
+task :deploy => ['deploy:push', 'deploy:asset_compile', 'deploy:restart', 'deploy:tag']
 
 namespace :deploy do
-  task :migrations => [:push, :off, :migrate, :restart, :on, :tag]
-  task :rollback => [:off, :push_previous, :restart, :on]
+  task :migrations => [:push, :asset_compile, :off, :migrate, :restart, :on, :tag]
+  task :rollback => [:off, :push_previous, :asset_compile, :restart, :on]
 
   task :push do
     puts 'Deploying site to Heroku ...'
