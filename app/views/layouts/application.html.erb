@@ -8,7 +8,13 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-  <%= stylesheet_link_tag "bootstrap_and_overrides", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <script>
+    $(function() {
+        $.stayInWebApp();
+    });
+  </script>
   
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1.0">
   <meta name="description" content="Budget App">
@@ -127,15 +133,5 @@
 		<%= yield %>
 		
 	</div>
-
-  <%= javascript_include_tag "jquery" %>
-  <%= javascript_include_tag "jquery_ujs" %>
-  <%= javascript_include_tag "twitter/bootstrap" %>
-  <%= javascript_include_tag "jquery.siwa.min" %>
-  <script>
-    $(function() {
-        $.stayInWebApp();
-    });
-  </script>
 </body>
 </html>
