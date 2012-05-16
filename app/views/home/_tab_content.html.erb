@@ -29,21 +29,30 @@
         <% current_user.budgets.each do |budget| %>
           <li>
             <%
-              amount = budget.amount 
-              budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
-                amount = amount - deduction.amount
-              end
-              budget.additions.where('created_at between ? and ?', @week_start, @week_end).each do |addition|
-                amount = amount + addition.amount
+
+              if budget.usage == 'spending'
+                amount = budget.amount 
+                icon = 'shopping-cart'
+                budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
+                  amount = amount - deduction.amount
+                end
+                budget.additions.where('created_at between ? and ?', @week_start, @week_end).each do |addition|
+                  amount = amount + addition.amount
+                end
+              else
+                amount = 0
+                icon = 'bar-chart'
+                budget.deductions.each do |deduction|
+                  amount = amount - deduction.amount
+                end
+                budget.additions.each do |addition|
+                  amount = amount + addition.amount
+                end
               end
             %>
             <%= link_to budget, :class => 'clearfix' do %>
               <span class="pull-left">
-                <% if budget.usage == 'spending' %>
-                  <i class="icon-shopping-cart"></i>&nbsp;
-                <% elsif budget.usage == 'saving' %>  
-                  <i class="icon-bar-chart"></i>&nbsp;
-                <% end %>
+                <i class="icon-<%= icon %>"></i>&nbsp;
               </span>
               <span class="pull-left">
                 <strong><%= budget.name %></strong> <br />
