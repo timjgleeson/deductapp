@@ -8,6 +8,11 @@ namespace :deploy do
     puts 'Deploying site to Heroku ...'
     puts `git push heroku`
   end
+
+  task :asset_compile do
+    puts 'Pre compiling assets on Heroku ...'
+    puts `heroku run rake assets:precompile`
+  end
   
   task :restart do
     puts 'Restarting app servers ...'
