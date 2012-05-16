@@ -31,7 +31,7 @@
 </p>
 <% end %>
 
-<% if @deduction.tag_list.nil? %>
+<% if !@deduction.tag_list.empty? %>
 <p>
   <b>Tags:</b>
   <%= @deduction.tag_list %>

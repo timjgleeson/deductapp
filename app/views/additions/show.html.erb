@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>
+    Addition 
+    <small class="pull-right">
+      <%= link_to edit_addition_path(@addition) do %><i class="icon-edit"></i><% end %>
+    </small>
+  </h1>
+</div>
+
+<p>
+  <b>Name:</b>
+  <%= @addition.name %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= number_to_currency(@addition.amount) %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @addition.description %>
+</p>
+
+<% if !@addition.budget.nil? %>
+<p>
+  <b>Budget:</b>
+  <%= @addition.budget.name %>
+</p>
+<% end %>
+
+<% if !@addition.tag_list.empty? %>
+<p>
+  <b>Tags:</b>
+  <%= @addition.tag_list %>
+</p>
+<% end %>
+
+<% if !@addition.budget.nil? %>
+<% if current_user == @addition.budget.users.include?(current_user) %>
+<p>
+  <b>Created by:</b>
+  <%= @addition.user.name unless @addition.user.name.empty? %>
+  <%= @addition.user.username if @addition.user.name.empty? %>
+  <%= @addition.user.email if @addition.user.name.empty? && @addition.user.username.empty? %>
+</p>
+<% end %>
+<% end %>

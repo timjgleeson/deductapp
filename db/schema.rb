@@ -11,14 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120512224848) do
+ActiveRecord::Schema.define(:version => 20120516004143) do
+
+  create_table "additions", :force => true do |t|
+    t.string   "name"
+    t.decimal  "amount"
+    t.text     "description"
+    t.integer  "budget_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "budgets", :force => true do |t|
-    t.string    "name"
-    t.decimal   "amount"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
-    t.integer   "user_id"
+    t.string   "name"
+    t.decimal  "amount"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "usage"
   end
 
   create_table "budgets_users", :id => false, :force => true do |t|
@@ -27,13 +38,13 @@ ActiveRecord::Schema.define(:version => 20120512224848) do
   end
 
   create_table "deductions", :force => true do |t|
-    t.string   "name"
-    t.decimal  "amount"
-    t.text     "description"
-    t.integer  "budget_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "user_id"
+    t.string    "name"
+    t.decimal   "amount"
+    t.text      "description"
+    t.integer   "budget_id"
+    t.timestamp "created_at",  :null => false
+    t.timestamp "updated_at",  :null => false
+    t.integer   "user_id"
   end
 
   create_table "favourites", :force => true do |t|

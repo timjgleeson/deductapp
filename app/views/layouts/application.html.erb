@@ -29,12 +29,17 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/">Deduct app</a>
+        <a class="brand" href="/">Deductapp</a>
         <% if user_signed_in? %>
           <ul class="nav pull-right">
-            <li class="dropdown">        
+            <li class="dropdown">
               <%= link_to new_deduction_path do %>
                 <i class="icon-minus icon-white"></i> <span class="hidden-phone">New Deduction</span>
+              <% end %>
+            </li>
+            <li class="dropdown">
+              <%= link_to new_addition_path do %>
+                <i class="icon-plus icon-white"></i> <span class="hidden-phone">New Addition</span>
               <% end %>
             </li>
             <li class="dropdown">
@@ -69,7 +74,14 @@
               <ul class="dropdown-menu ">
                 <% current_user.budgets.each do |budget| %>
                 <li>
-                  <%= link_to budget.name, budget %>
+                  <%= link_to budget do %>
+                    <% if budget.usage == 'spending' %>
+                      <i class="icon-shopping-cart"></i>
+                    <% elsif budget.usage == 'saving' %>  
+                      <i class="icon-signal"></i>
+                    <% end %>
+                    <%= budget.name %>
+                  <% end %>
                 </li>
                 <% end %>
                 <li class="divider"></li>
