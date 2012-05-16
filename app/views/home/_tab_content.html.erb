@@ -17,7 +17,7 @@
     </li>
     <li class="pull-right">
       <%= link_to '#budgets-savings', :"data-toggle" => "tab" do %>
-        <i class="icon-signal"></i> <span class="hidden-phone">Savings Budgets</span>
+        <i class="icon-bar-chart"></i> <span class="hidden-phone">Savings Budgets</span>
       <% end %>
     </li>
     <li class="<%= "active " if params[:deduction_page].nil? && params[:addition_page].nil? %>pull-right">
@@ -37,6 +37,9 @@
               amount = budget.amount 
               budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
                 amount = amount - deduction.amount
+              end
+              budget.additions.where('created_at between ? and ?', @week_start, @week_end).each do |addition|
+                amount = amount + addition.amount
               end
             %>
             <%= link_to budget, :class => 'clearfix' do %>

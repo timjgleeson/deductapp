@@ -2,7 +2,7 @@ class AdditionsController < ApplicationController
   # GET /additions
   # GET /additions.json
   def index
-    @additions = Addition.all
+    @additions = current_user.additions.paginate(:page => params[:page], :per_page => 10).order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb

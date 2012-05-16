@@ -29,7 +29,7 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="/">Deductapp</a>
+        <a class="brand" href="/"><i class="icon-home icon-white visible-phone"></i><span class="hidden-phone">Deductapp</span></a>
         <% if user_signed_in? %>
           <ul class="nav pull-right">
             <li class="dropdown">
@@ -78,7 +78,7 @@
                     <% if budget.usage == 'spending' %>
                       <i class="icon-shopping-cart"></i>
                     <% elsif budget.usage == 'saving' %>  
-                      <i class="icon-signal"></i>
+                      <i class="icon-bar-chart"></i>
                     <% end %>
                     <%= budget.name %>
                   <% end %>

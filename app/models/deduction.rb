@@ -3,6 +3,7 @@ class Deduction < ActiveRecord::Base
   
   validates :name, :presence => true
   validates :amount, :presence => true
+  validates :budget_id, :presence => true
   validates :user_id, :presence => true
 
   validates :amount, :numericality => true

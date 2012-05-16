@@ -1,31 +1,22 @@
-<h1>Listing additions</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Amount</th>
-    <th>Description</th>
-    <th>Budget</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<div class="page-header">
+    <h1>All Additions</h1>
+</div>
+<ul class="nav nav-tabs nav-stacked">
 <% @additions.each do |addition| %>
-  <tr>
-    <td><%= addition.name %></td>
-    <td><%= addition.amount %></td>
-    <td><%= addition.description %></td>
-    <td><%= addition.budget_id %></td>
-    <td><%= addition.user_id %></td>
-    <td><%= link_to 'Show', addition %></td>
-    <td><%= link_to 'Edit', edit_addition_path(addition) %></td>
-    <td><%= link_to 'Destroy', addition, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <li>
+    <%= link_to addition, :class => 'clearfix' do %>
+      <span class="pull-left">
+        <strong><%= addition.name %></strong> <br />
+        <%= number_to_currency(addition.amount) %> on <%= addition.created_at.strftime('%e/%-m/%Y') %>
+      </span>
+      <span class="pull-right">
+        <% if !addition.budget.nil? %>
+          <br /><%= addition.budget.name %>
+        <% end %>
+      </span>
+    <% end %>
+  </li>
 <% end %>
-</table>
+</ul>
 
-<br />
-
-<%= link_to 'New Addition', new_addition_path %>
+<%= will_paginate @additions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
