@@ -1,4 +1,4 @@
-Redacted::Application.routes.draw do
+Deductapp::Application.routes.draw do
 
   resources :additions
 

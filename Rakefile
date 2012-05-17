@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Redacted::Application.load_tasks
+Deductapp::Application.load_tasks
