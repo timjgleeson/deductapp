@@ -35,6 +35,7 @@ gem 'bootstrap-will_paginate'
 gem 'acts-as-taggable-on', '~> 2.2.2'
 
 gem 'google-analytics-rails'
+gem 'newrelic_rpm'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
