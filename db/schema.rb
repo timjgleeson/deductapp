@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530080321) do
+ActiveRecord::Schema.define(:version => 20120530100944) do
 
   create_table "additions", :force => true do |t|
     t.string    "name"

@@ -1,33 +1,23 @@
-<h1>Listing transactions</h1>
+<div class="page-header">
+  <h1>Listing transactions</h1>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Transaction type</th>
-    <th>Amount</th>
-    <th>Description</th>
-    <th>Budget</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul class="nav nav-tabs nav-stacked">
 <% @transactions.each do |transaction| %>
-  <tr>
-    <td><%= transaction.name %></td>
-    <td><%= transaction.transaction_type %></td>
-    <td><%= transaction.amount %></td>
-    <td><%= transaction.description %></td>
-    <td><%= transaction.budget %></td>
-    <td><%= transaction.user_id %></td>
-    <td><%= link_to 'Show', transaction %></td>
-    <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-    <td><%= link_to 'Destroy', transaction, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <li>
+    <%= link_to transaction, :class => 'clearfix' do %>
+      <span class="pull-left">
+        <strong><%= transaction.name %></strong> <br />
+        <%= number_to_currency(transaction.amount) %> on <%= transaction.created_at.strftime('%e/%-m/%Y') %>
+      </span>
+      <span class="pull-right">
+        <% if !transaction.budget.nil? %>
+          <br /><%= transaction.budget.name %>
+        <% end %>
+      </span>
+    <% end %>
+  </li>
 <% end %>
-</table>
-
-<br />
+</ul>
 
 <%= link_to 'New Transaction', new_transaction_path %>

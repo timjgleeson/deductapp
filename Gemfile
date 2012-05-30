@@ -33,7 +33,6 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 
-gem 'backbone-on-rails'
 
 gem 'acts-as-taggable-on', '~> 2.2.2'
 
