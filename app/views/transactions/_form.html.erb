@@ -1,0 +1,14 @@
+<%= semantic_form_for @transaction do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :transaction_type, :as => :select, :collection => Hash[:Deduction => 1, :Addition => 2] %>
+    <%= f.input :amount %>
+    <%= f.input :description %>
+    <%= f.input :budget_id, :required => true, :as => :select, :collection => Hash[current_user.budgets.map{|b| [b.name, b.id]}], :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :tag_list, :input_html => { :class => "input-xlarge" } %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

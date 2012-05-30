@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 gem 'heroku'
+gem 'taps'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -32,10 +33,13 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 
+gem 'backbone-on-rails'
+
 gem 'acts-as-taggable-on', '~> 2.2.2'
 
 gem 'google-analytics-rails'
 gem 'newrelic_rpm'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

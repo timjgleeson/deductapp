@@ -11,25 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516004143) do
+ActiveRecord::Schema.define(:version => 20120530080321) do
 
   create_table "additions", :force => true do |t|
-    t.string   "name"
-    t.decimal  "amount"
-    t.text     "description"
-    t.integer  "budget_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string    "name"
+    t.decimal   "amount"
+    t.text      "description"
+    t.integer   "budget_id"
+    t.integer   "user_id"
+    t.timestamp "created_at",  :null => false
+    t.timestamp "updated_at",  :null => false
   end
 
   create_table "budgets", :force => true do |t|
-    t.string   "name"
-    t.decimal  "amount"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "user_id"
-    t.string   "usage"
+    t.string    "name"
+    t.decimal   "amount"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+    t.integer   "user_id"
+    t.string    "usage"
   end
 
   create_table "budgets_users", :id => false, :force => true do |t|
@@ -73,6 +73,20 @@ ActiveRecord::Schema.define(:version => 20120516004143) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "name"
+    t.integer  "transaction_type"
+    t.float    "amount"
+    t.text     "description"
+    t.integer  "budget_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "transactions", ["budget_id"], :name => "index_transactions_on_budget_id"
+  add_index "transactions", ["user_id"], :name => "index_transactions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string    "email",                  :default => "", :null => false

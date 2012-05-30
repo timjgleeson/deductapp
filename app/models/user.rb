@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   validates :username, :uniqueness => true
-
+  
+  has_many :transactions
   has_many :deductions
   has_many :additions
   has_and_belongs_to_many :budgets

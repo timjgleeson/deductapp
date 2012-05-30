@@ -121,11 +121,16 @@
     <div class="tab-pane" id="weeks">
       <ul class="nav nav-tabs nav-stacked">
         <li>
+          <%= link_to week_of_path(2012, 5, 20) do %>
+            20/5/2012 - 26/5/2012
+          <% end %>
+        </li>
+	<li>
           <%= link_to week_of_path(2012, 5, 13) do %>
             13/5/2012 - 19/5/2012
           <% end %>
         </li>
-        <li>
+	<li>
           <%= link_to week_of_path(2012, 5, 6) do %>
             6/5/2012 - 12/5/2012
           <% end %>

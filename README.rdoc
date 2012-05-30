@@ -1,2 +1,10 @@
+/user/:id
+  Get user info and budgets (:name, :type and :id)
 
-Test
+/budget/:id
+  Get budget info
+
+/budget/:id/transactions?week=YYYY-MM-DD
+  Gets budget info and transactions
+  Week is optional, if it not there, show current weeks transactions
+
