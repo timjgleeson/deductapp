@@ -51,7 +51,7 @@
               <ul class="dropdown-menu ">
                 <% current_user.favourites.each do |favourite| %>
                   <li>
-                    <%= link_to deductions_path( :deduction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post do %>
+                  <%= link_to transactions_path( :transaction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :transaction_type => favourite.transaction_type, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post do %>
                       <%= favourite.name %> | <%= favourite.amount %> 
                     <% end %>
                   </li>
@@ -76,11 +76,7 @@
                 <% current_user.budgets.each do |budget| %>
                 <li>
                   <%= link_to budget do %>
-                    <% if budget.usage == 'spending' %>
-                      <i class="icon-shopping-cart"></i>
-                    <% elsif budget.usage == 'saving' %>  
-                      <i class="icon-bar-chart"></i>
-                    <% end %>
+                    <i class="icon-<%= budget.icon %>"></i>
                     <%= budget.name %>
                   <% end %>
                 </li>

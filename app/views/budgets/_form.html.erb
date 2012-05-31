@@ -3,7 +3,7 @@
   
   <%= f.inputs do %>
     <%= f.input :name, :input_html => { :class => "input-xlarge" } %>
-    <%= f.input :usage, :label => 'Type', :as => :radio, :collection => { "Spending Budget" => 'spending', "Savings Budget" => 'saving' }, :input_html => { :class => "input-xlarge" } %>
+    <%= f.input :budget_type, :label => 'Type', :as => :radio, :collection => { "Spending Budget" => 'spending', "Savings Budget" => 'saving' }, :input_html => { :class => "input-xlarge" } %>
     <%= f.input :amount, :input_html => { :class => "input-xlarge" } %>
   <% end %>
   

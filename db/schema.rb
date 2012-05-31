@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530100944) do
+ActiveRecord::Schema.define(:version => 20120531112150) do
 
   create_table "additions", :force => true do |t|
     t.string    "name"
@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(:version => 20120530100944) do
   end
 
   create_table "budgets", :force => true do |t|
-    t.string    "name"
-    t.decimal   "amount"
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
-    t.integer   "user_id"
-    t.string    "usage"
+    t.string   "name"
+    t.decimal  "amount"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+    t.string   "budget_type"
   end
 
   create_table "budgets_users", :id => false, :force => true do |t|
@@ -53,8 +53,9 @@ ActiveRecord::Schema.define(:version => 20120530100944) do
     t.text      "description"
     t.integer   "budget_id"
     t.integer   "user_id"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
+    t.timestamp "created_at",                      :null => false
+    t.timestamp "updated_at",                      :null => false
+    t.integer   "transaction_type", :default => 1
   end
 
   create_table "taggings", :force => true do |t|
