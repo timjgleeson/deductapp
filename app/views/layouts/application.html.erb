@@ -39,13 +39,8 @@
         <% if user_signed_in? %>
           <ul class="nav pull-right">
             <li class="dropdown">
-              <%= link_to new_deduction_path do %>
-                <i class="icon-minus icon-white"></i> <span class="hidden-phone">New Deduction</span>
-              <% end %>
-            </li>
-            <li class="dropdown">
-              <%= link_to new_addition_path do %>
-                <i class="icon-plus icon-white"></i> <span class="hidden-phone">New Addition</span>
+              <%= link_to new_transaction_path do %>
+                <i class="icon-bookmark icon-white"></i> <span class="hidden-phone">New Transaction</span>
               <% end %>
             </li>
             <li class="dropdown">

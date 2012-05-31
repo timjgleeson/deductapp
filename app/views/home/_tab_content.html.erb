@@ -6,13 +6,8 @@
       <% end %>
     </li>
     <li class="<%= "active " if params[:addition_page].presence %>pull-right">
-      <%= link_to '#week-addition', :"data-toggle" => "tab" do %>
-        <i class="icon-plus"></i> <span class="hidden-phone">Additions</span>
-      <% end %>
-    </li>
-    <li class="<%= "active " if params[:deduction_page].presence %>pull-right">
       <%= link_to '#week-deduction', :"data-toggle" => "tab" do %>
-        <i class="icon-minus"></i> <span class="hidden-phone">Deductions</span>
+        <i class="icon-bookmark"></i> <span class="hidden-phone">Transactions</span>
       <% end %>
     </li>
     <li class="<%= "active " if params[:deduction_page].nil? && params[:addition_page].nil? %>pull-right">
@@ -28,35 +23,13 @@
       <ul class="nav nav-tabs nav-stacked">
         <% current_user.budgets.each do |budget| %>
           <li>
-            <%
-
-              if budget.usage == 'spending'
-                amount = budget.amount 
-                icon = 'shopping-cart'
-                budget.deductions.where('created_at between ? and ?', @week_start, @week_end).each do |deduction|
-                  amount = amount - deduction.amount
-                end
-                budget.additions.where('created_at between ? and ?', @week_start, @week_end).each do |addition|
-                  amount = amount + addition.amount
-                end
-              else
-                amount = 0
-                icon = 'bar-chart'
-                budget.deductions.each do |deduction|
-                  amount = amount - deduction.amount
-                end
-                budget.additions.each do |addition|
-                  amount = amount + addition.amount
-                end
-              end
-            %>
             <%= link_to budget, :class => 'clearfix' do %>
               <span class="pull-left">
-                <i class="icon-<%= icon %>"></i>&nbsp;
+                <i class="icon-<%= budget.icon %>"></i>&nbsp;
               </span>
               <span class="pull-left">
                 <strong><%= budget.name %></strong> <br />
-                <%= number_to_currency(amount) %>
+                <%= number_to_currency(budget.current_amount(@week_start.year, @week_start.month, @week_start.day)) %>
               </span>
             <% end %>
           </li>
@@ -66,9 +39,12 @@
 
     <div class="<%= "active " if params[:deduction_page].presence %>tab-pane" id="week-deduction">
       <ul class="nav nav-tabs nav-stacked">
-      <% @deductions.each do |deduction| %>
+      <% @transactions.each do |deduction| %>
         <li>
           <%= link_to deduction, :class => 'clearfix' do %>
+            <span class="pull-left">
+              <i class="icon-<%= deduction.transaction_type == 1 ? 'minus' : 'plus' %>"></i>&nbsp;
+            </span>
             <span class="pull-left">
               <strong><%= deduction.name %></strong> <br />
               <%= number_to_currency(deduction.amount) %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
@@ -76,11 +52,7 @@
             <span class="pull-right">
               <% if !deduction.budget.nil? %>
                 <br />
-                <% if deduction.budget.usage == 'spending' %>
-                  <i class="icon-shopping-cart"></i>
-                <% elsif deduction.budget.usage == 'saving' %>  
-                  <i class="icon-bar-chart"></i>
-                <% end %>
+                <i class="icon-<%= deduction.budget.icon %>"></i>
                 <%= deduction.budget.name %>
               <% end %>
             </span>
@@ -88,34 +60,6 @@
         </li>
       <% end %>
       </ul>
-      <%= will_paginate @deductions, :param_name => :deduction_page, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
-    </div>
-
-    <div class="<%= "active " if params[:addition_page].presence %>tab-pane" id="week-addition">
-      <ul class="nav nav-tabs nav-stacked">
-      <% @additions.each do |addition| %>
-        <li>
-          <%= link_to addition, :class => 'clearfix' do %>
-            <span class="pull-left">
-              <strong><%= addition.name %></strong> <br />
-              <%= number_to_currency(addition.amount) %> on <%= addition.created_at.strftime('%e/%-m/%Y') %>
-            </span>
-            <span class="pull-right">
-              <% if !addition.budget.nil? %>
-                <br />
-                <% if addition.budget.usage == 'spending' %>
-                  <i class="icon-shopping-cart"></i>
-                <% elsif addition.budget.usage == 'saving' %>  
-                  <i class="icon-bar-chart"></i>
-                <% end %>
-                <%= addition.budget.name %>
-              <% end %>
-            </span>
-          <% end %>
-        </li>
-      <% end %>
-      </ul>
-      <%= will_paginate @additions, :param_name => :addition_page, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
     </div>
 
     <div class="tab-pane" id="weeks">
