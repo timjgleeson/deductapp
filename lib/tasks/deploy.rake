@@ -1,6 +1,7 @@
-task :deploy => ['deploy:push', 'deploy:asset_compile', 'deploy:restart', 'deploy:tag']
+task :deploy => ['deploy:push', 'deploy:restart', 'deploy:tag']
 
 namespace :deploy do
+  task :new_assets => [:push, :asset_compile, :restart, :on]
   task :migrations => [:push, :asset_compile, :off, :migrate, :restart, :on, :tag]
   task :rollback => [:off, :push_previous, :asset_compile, :restart, :on]
 
@@ -24,6 +25,7 @@ namespace :deploy do
     puts "Tagging release as '#{release_name}'"
     puts `git tag -a #{release_name} -m 'Tagged release'`
     puts `git push --tags heroku`
+    puts `git push origin --tags`
   end
   
   task :migrate do
