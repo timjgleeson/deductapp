@@ -51,8 +51,12 @@
               <ul class="dropdown-menu ">
                 <% current_user.favourites.each do |favourite| %>
                   <li>
-                  <%= link_to transactions_path( :transaction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :transaction_type => favourite.transaction_type, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post do %>
-                      <%= favourite.name %> | <%= favourite.amount %> 
+                  <%= link_to transactions_path( :transaction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :transaction_type => favourite.transaction_type, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post, :class => 'clearfix' do %>
+                      <span class="pull-left"><i class="icon-<%= favourite.icon %>"></i>&nbsp;</span>
+                      <span class="pull-left">
+                        <%= favourite.name %><br />
+                        <%= number_to_currency(favourite.amount) %> 
+                      </span>
                     <% end %>
                   </li>
                 <% end %>
