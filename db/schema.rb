@@ -11,39 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602223319) do
-
-  create_table "additions", :force => true do |t|
-    t.string    "name"
-    t.decimal   "amount"
-    t.text      "description"
-    t.integer   "budget_id"
-    t.integer   "user_id"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
-  end
+ActiveRecord::Schema.define(:version => 20120602234334) do
 
   create_table "budgets", :force => true do |t|
-    t.string   "name"
-    t.decimal  "amount"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "budget_type"
+    t.string    "name"
+    t.decimal   "amount"
+    t.timestamp "created_at",  :null => false
+    t.timestamp "updated_at",  :null => false
+    t.string    "budget_type"
   end
 
   create_table "budgets_users", :id => false, :force => true do |t|
     t.integer "budget_id"
     t.integer "user_id"
-  end
-
-  create_table "deductions", :force => true do |t|
-    t.string    "name"
-    t.decimal   "amount"
-    t.text      "description"
-    t.integer   "budget_id"
-    t.timestamp "created_at",  :null => false
-    t.timestamp "updated_at",  :null => false
-    t.integer   "user_id"
   end
 
   create_table "favourites", :force => true do |t|
@@ -107,7 +87,6 @@ ActiveRecord::Schema.define(:version => 20120602223319) do
     t.string    "authentication_token"
   end
 
-  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
