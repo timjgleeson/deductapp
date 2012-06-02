@@ -3,16 +3,19 @@
 </div>
 
 <ul class="nav nav-tabs nav-stacked">
-<% @deductions.each do |deduction| %>
+<% @transactions.each do |transaction| %>
   <li>
-    <%= link_to deduction, :class => 'clearfix' do %>
+    <%= link_to transaction, :class => 'clearfix' do %>
       <span class="pull-left">
-        <strong><%= deduction.name %></strong> <br />
-        $<%= number_with_precision deduction.amount, :precision => 2 %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
+        <i class="icon-<%= transaction.icon %>"></i>&nbsp;
+      </span>
+      <span class="pull-left">
+        <strong><%= transaction.name %></strong> <br />
+        <%= number_to_currency(transaction.amount) %> on <%= transaction.created_at.strftime('%e/%-m/%Y') %>
       </span>
     <% end %>
   </li>
 <% end %>
 </ul>
 
-<%= will_paginate @deductions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>
+<%= will_paginate @transactions, :page_links => false, :previous_label => "<i class=\"icon-chevron-left\"></i>", :next_label => "<i class=\"icon-chevron-right\"></i>" %>

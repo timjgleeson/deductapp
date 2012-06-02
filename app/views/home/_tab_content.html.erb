@@ -43,7 +43,7 @@
         <li>
           <%= link_to deduction, :class => 'clearfix' do %>
             <span class="pull-left">
-              <i class="icon-<%= deduction.transaction_type == 1 ? 'minus' : 'plus' %>"></i>&nbsp;
+              <i class="icon-<%= deduction.icon %>"></i>&nbsp;
             </span>
             <span class="pull-left">
               <strong><%= deduction.name %></strong> <br />
