@@ -17,5 +17,11 @@ Deductapp::Application.routes.draw do
   resources :users
 
   get "week/:year/:month/:day" => "home#week", :as => :week_of
-  root :to => 'home#index'
+  
+  authenticated do
+    root :to => 'home#index'
+  end
+  
+  root :to => 'home#guest'
+
 end

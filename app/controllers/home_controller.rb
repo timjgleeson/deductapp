@@ -1,9 +1,8 @@
 class HomeController < ApplicationController
-  
+  before_filter :authenticate_user!, :only => [:index, :week]  
   before_filter :set_time_zone
 
   def index
-    if user_signed_in?
       @today = DateTime.now
       @today_start = Time.new(@today.year, @today.month, @today.day, 0, 0, 0, 0)
 
@@ -16,12 +15,6 @@ class HomeController < ApplicationController
         format.html # home.html.erb
         format.json { render json: @deductions }
       end
-    else
-      respond_to do |format|
-        format.html { render :home_guest } # home_guest.html.erb
-        format.json { render json: '' }
-      end
-    end
   end
 
   def week 
@@ -37,4 +30,7 @@ class HomeController < ApplicationController
     end
   end
 
+  def guest
+
+  end
 end

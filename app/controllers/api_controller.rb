@@ -14,4 +14,8 @@ class ApiController < ApplicationController
       return
     end
   end
+
+  def not_found
+    Hash[:not_found => "Resource not found"]
+  end
 end

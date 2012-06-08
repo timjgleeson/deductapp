@@ -14,7 +14,7 @@ class Api::V1::TransactionsController < ApiController
   end
 
   def show
-    @transaction = current_user.transactions.find(params[:id])
+    @transaction = current_user.transactions.find(params[:id]) || not_found
     
     render :status=>200, :json=>@transaction
   end
