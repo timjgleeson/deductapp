@@ -1,4 +1,150 @@
-<div class="tabbable">
+<div class="container hidden-phone">
+  <div class="row">
+    <div class="span9">
+      <div class="page-header clearfix">
+        <h2 class="pull-left">
+          Transactions
+        </h2>
+        
+        <ul class="nav nav-pills pull-right" style="margin-bottom: 0">
+          <li>
+            <%= link_to new_transaction_path do %>
+              <i class="icon-bookmark icon-white"></i> <span class="hidden-phone">New Transaction</span>
+            <% end %>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown"
+               href="#">
+                <i class="icon-star icon-white"></i> <span class="hidden-phone">Favourites</span>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu ">
+                <% current_user.favourites.each do |favourite| %>
+                  <li>
+                  <%= link_to transactions_path( :transaction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :transaction_type => favourite.transaction_type, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post, :class => 'clearfix' do %>
+                      <span class="pull-left"><i class="icon-<%= favourite.icon %>"></i>&nbsp;</span>
+                      <span class="pull-left">
+                        <%= favourite.name %><br />
+                        <%= number_to_currency(favourite.amount) %> 
+                      </span>
+                    <% end %>
+                  </li>
+                <% end %>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to 'Favourites List', favourites_path %>
+                </li>
+                <li>
+                  <%= link_to new_favourite_path do %>
+                    <i class="icon-plus"></i> New Favourite
+                  <% end %>
+                </li>
+            </ul>
+          </li>
+        </ul>
+        
+      </div>
+      
+      <ul class="nav nav-tabs nav-stacked">
+      <% @transactions.each do |deduction| %>
+        <li>
+          <%= link_to deduction, :class => 'clearfix' do %>
+            <span class="pull-left">
+              <i class="icon-<%= deduction.icon %>"></i>&nbsp;
+            </span>
+            <span class="pull-left">
+              <strong><%= deduction.name %></strong> <br />
+              <%= number_to_currency(deduction.amount) %> on <%= deduction.created_at.strftime('%e/%-m/%Y') %>
+            </span>
+            <span class="pull-right">
+              <% if !deduction.budget.nil? %>
+                <br />
+                <i class="icon-<%= deduction.budget.icon %>"></i>
+                <%= deduction.budget.name %>
+              <% end %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+    <div class="span3">
+      <div class="page-header clearfix">
+        <h2 class="pull-left">Budgets</h2>
+        <ul class="nav nav-pills pull-right" style="margin-bottom: 0">
+          <li>
+            <%= link_to new_budget_path do %>
+              <i class="icon-plus"></i> New Budget
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <ul class="nav nav-tabs nav-stacked">
+        <% @budgets.each do |budget| %>
+          <li>
+            <%= link_to budget, :class => 'clearfix' do %>
+              <span class="pull-left">
+                <i class="icon-<%= budget.icon %>"></i>&nbsp;
+              </span>
+              <span class="pull-left">
+                <strong><%= budget.name %></strong> <br />
+                <%= number_to_currency(budget.current_amount(@week_start.year, @week_start.month, @week_start.day)) %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>      
+      
+      <div class="page-header">
+        <h2>Weeks</h2>
+      </div>
+      <ul class="nav nav-tabs nav-stacked">
+        <li>
+          <%= link_to root_path do %>
+            This week
+          <% end %>
+        </li>
+        <li>
+          <%= link_to week_of_path(2012, 6, 3) do %>
+            6/3/2012 - 9/6/2012
+          <% end %>
+        </li>
+        <li>
+          <%= link_to week_of_path(2012, 5, 27) do %>
+            27/5/2012 - 2/6/2012
+          <% end %>
+        </li>
+        <li>
+          <%= link_to week_of_path(2012, 5, 20) do %>
+            20/5/2012 - 26/5/2012
+          <% end %>
+        </li>
+    	  <li>
+          <%= link_to week_of_path(2012, 5, 13) do %>
+            13/5/2012 - 19/5/2012
+          <% end %>
+        </li>
+	      <li>
+          <%= link_to week_of_path(2012, 5, 6) do %>
+            6/5/2012 - 12/5/2012
+          <% end %>
+        </li>
+        <li>
+          <%= link_to week_of_path(2012, 4, 29) do %>
+            29/4/2012 - 5/5/2012
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="tabbable visible-phone">
   <ul class="nav nav-tabs">
     <li class="pull-right">
       <%= link_to '#weeks', :"data-toggle" => "tab" do %>
@@ -21,7 +167,7 @@
 
     <div class="<%= "active " if params[:deduction_page].nil? && params[:addition_page].nil? %>tab-pane" id="budgets">
       <ul class="nav nav-tabs nav-stacked">
-        <% current_user.budgets.each do |budget| %>
+        <% @budgets.each do |budget| %>
           <li>
             <%= link_to budget, :class => 'clearfix' do %>
               <span class="pull-left">

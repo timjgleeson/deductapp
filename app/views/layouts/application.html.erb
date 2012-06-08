@@ -38,17 +38,17 @@
         <a class="brand" href="/"><i class="icon-home icon-white visible-phone"></i><span class="hidden-phone">deduct</span></a>
         <% if user_signed_in? %>
           <ul class="nav pull-right">
-            <li class="dropdown">
+            <li class="visible-phone">
               <%= link_to new_transaction_path do %>
                 <i class="icon-bookmark icon-white"></i> <span class="hidden-phone">New Transaction</span>
               <% end %>
             </li>
-            <li class="dropdown">
+            <li class="dropdown visible-phone">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-star icon-white"></i> <span class="hidden-phone">Favourites</span>
                 <b class="caret"></b>
               </a>
-              <ul class="dropdown-menu ">
+              <ul class="dropdown-menu">
                 <% current_user.favourites.each do |favourite| %>
                   <li>
                   <%= link_to transactions_path( :transaction => { :name => favourite.name, :amount => favourite.amount, :description => favourite.description, :transaction_type => favourite.transaction_type, :budget_id => favourite.budget_id, :tag_list => favourite.tag_list } ), :method => :post, :class => 'clearfix' do %>
@@ -71,7 +71,7 @@
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown visible-phone">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-book icon-white"></i> <span class="hidden-phone">Budgets</span>
                 <b class="caret"></b>

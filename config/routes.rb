@@ -2,7 +2,7 @@ Deductapp::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :tokens, :only => [:create, :destroy]
-      resources :transactions, :only => [:index, :show]
+      resources :transactions, :only => [:index, :show, :create]
       resources :budgets, :only => [:index, :show]
     end
   end
