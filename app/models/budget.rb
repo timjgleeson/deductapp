@@ -1,6 +1,6 @@
 class Budget < ActiveRecord::Base
   attr_accessible :amount, :name, :budget_type
-
+  
  	validates :name, :presence => true
   validates :budget_type, :presence => true
   validates :amount, :presence => true
@@ -8,8 +8,6 @@ class Budget < ActiveRecord::Base
 	validates :amount, :numericality => true
 
   has_many :transactions
-  has_many :deductions
-  has_many :additions
   has_and_belongs_to_many :users
   has_many :favourites
 

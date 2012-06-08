@@ -1,15 +1,21 @@
-class Api::V1::TransactionsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :set_time_zone
+class Api::V1::TransactionsController < ApiController
   respond_to :json
+  before_filter :check_file
+  before_filter :check_token
+  before_filter :verify_authenticity_token
   
   def index
-    @transactions = current_user.transactions
+    limit = params[:limit] || 10
+    offset = params[:offset] || 0
+    
+    @transactions = current_user.transactions.order('created_at DESC').limit(limit).offset(offset).select("name, amount, description, transaction_type, budget_id")
+    
     render :status=>200, :json=>@transactions
   end
 
   def show
-    @transaction = Transaction.find(params[:id])
+    @transaction = current_user.transactions.find(params[:id])
+    
     render :status=>200, :json=>@transaction
   end
 end
